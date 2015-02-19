@@ -1,7 +1,8 @@
 package fpinscala.errorhandling
 
-
-import scala.{Option => _, Either => _, Left => _, Right => _, _} // hide std library `Option` and `Either`, since we are writing our own in this chapter
+// hide std library `Option` and `Either`, since we are writing
+// our own in this chapter
+import scala.{Option => _, Either => _, Left => _, Right => _, _} 
 
 sealed trait Either[+E,+A] {
 
@@ -40,9 +41,14 @@ case class Left[+E](get: E) extends Either[E,Nothing]
 case class Right[+A](get: A) extends Either[Nothing,A]
 
 object Either {
-  def traverse[E,A,B](es: List[A])(f: A => Either[E, B]): Either[E, List[B]] = sys.error("todo")
+
+  // 4.7 Implement sequence and traverse for Either. These
+  // should return the first error that's encountered, if
+  // there is one.
 
   def sequence[E,A](es: List[Either[E,A]]): Either[E,List[A]] = sys.error("todo")
+
+  def traverse[E,A,B](es: List[A])(f: A => Either[E, B]): Either[E, List[B]] = sys.error("todo")
 
   def mean(xs: IndexedSeq[Double]): Either[String, Double] = 
     if (xs.isEmpty) 
