@@ -22,7 +22,6 @@ object ErrorHandlingMain {
    val c_res = Option.sequence(c)
    println("c_res: ")
    println(c_res)
-   */
 
    def foo(x: Int): Option[Double] = {
      if (x == 42) None
@@ -38,5 +37,21 @@ object ErrorHandlingMain {
    val e_res = Option.traverse(e)(foo)
    println("e_res: ")
    println(e_res)
+   */
+
+   def plus1(x: Int): Int = {
+     x + 1
+   }
+
+   val e = Left("error")
+   val e_res = e map plus1
+   println("e_res:")
+   println(e_res + " ")
+
+   val a = Right(2)
+   val a_res = a map plus1
+   println("a_res:")
+   println(a_res + " ")
+
   }
 }
