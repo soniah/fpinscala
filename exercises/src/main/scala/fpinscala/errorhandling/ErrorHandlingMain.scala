@@ -66,5 +66,10 @@ object ErrorHandlingMain {
    println("Either.sequence(esr)): " + (Either.sequence(esr)))
    println("Either.sequence(esl)): " + (Either.sequence(esl)))
 
+   val tsr = List(1,2,3)
+   println("traverse tsr +2: " + (Either.traverse(tsr)(plus2)))
+   val tsl = List(1,42,3)
+   println("traverse tsl +2: " + (Either.traverse(tsl)(plus2)))
+
   }
 }
