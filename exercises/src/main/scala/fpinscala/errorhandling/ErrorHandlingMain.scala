@@ -52,5 +52,15 @@ object ErrorHandlingMain {
    val b = Right(42)
    println("a orElse b: " + (a orElse b))
    println("e orElse b: " + (e orElse b))
+
+   def plus2(x: Int): Either[String, Int] = {
+     if (x == 42) Left("Not the meaning of..")
+     else Right(x + 2)
+   }
+   println("Right(3) flatMap plus2: " + (Right(3) flatMap plus2))
+   println("Right(42) flatMap plus2: " + (Right(42) flatMap plus2))
+
+
+
   }
 }
