@@ -44,14 +44,13 @@ object ErrorHandlingMain {
    }
 
    val e = Left("error")
-   val e_res = e map plus1
-   println("e_res:")
-   println(e_res + " ")
+   println("e map plus1: " + (e map plus1))
 
    val a = Right(2)
-   val a_res = a map plus1
-   println("a_res:")
-   println(a_res + " ")
+   println("a map plus1: " + (a map plus1))
 
+   val b = Right(42)
+   println("a orElse b: " + (a orElse b))
+   println("e orElse b: " + (e orElse b))
   }
 }
