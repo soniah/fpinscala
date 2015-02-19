@@ -12,7 +12,7 @@ sealed trait Either[+E,+A] {
 
   def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] = this match {
     case Right(x) => Right(x)
-    case Left(x) => b
+    case Left(_) => b
   }
 
   def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B] = this match {
@@ -24,6 +24,15 @@ sealed trait Either[+E,+A] {
     case (Right(a), Right(b)) => Right(f(a,b))
     case (Left(a), _) => Left(a)
     case (_, Left(b)) => Left(b)
+    // shorter way:
+    // for { a <- this; b1 <- b } yield f(a,b1)
+    //
+    // "Since lifting functions is so common in Scala, Scala
+    // provides a syntactic construct called a for-comprehension
+    // that it expands automatically to a series of flatmap
+    // and map calls... The compiler desugars the bindings to
+    // flatmap calls, with the _final_binding_and_yield_ being
+    // converted to a call to map."
   }
 
 }
