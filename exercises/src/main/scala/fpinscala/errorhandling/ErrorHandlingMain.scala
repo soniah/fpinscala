@@ -60,7 +60,11 @@ object ErrorHandlingMain {
    println("Right(3) flatMap plus2: " + (Right(3) flatMap plus2))
    println("Right(42) flatMap plus2: " + (Right(42) flatMap plus2))
 
-
+   val esr = List(Right(1), Right(2), Right(3), Right(4))
+   val esl = List(Right(1), Left("error1"), Right(3),
+     Left("error2") )
+   println("Either.sequence(esr)): " + (Either.sequence(esr)))
+   println("Either.sequence(esl)): " + (Either.sequence(esl)))
 
   }
 }
