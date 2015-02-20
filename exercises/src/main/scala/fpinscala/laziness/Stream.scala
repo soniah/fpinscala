@@ -23,9 +23,10 @@ trait Stream[+A] {
     case _ => Empty
   }
 
-  def drop(n: Int): Stream[A] = this match {
+  @annotation.tailrec // soln
+  final def drop(n: Int): Stream[A] = this match {
     case Cons(h, t) if (n > 0) => t().drop(n - 1)
-    case s => s
+    case s => s // or soln: case _ => this
   }
 
   def takeWhile(p: A => Boolean): Stream[A] = sys.error("todo")
