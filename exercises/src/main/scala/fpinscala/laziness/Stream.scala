@@ -29,7 +29,11 @@ trait Stream[+A] {
     case s => s // or soln: case _ => this
   }
 
-  def takeWhile(p: A => Boolean): Stream[A] = sys.error("todo")
+  def takeWhile(p: A => Boolean): Stream[A] = this match {
+    // soln: scala style is "t() takeWhile f"
+    case Cons(h, t) if p(h()) => cons(h(), t().takeWhile(p))
+    case _ => Empty
+  }
 
   def forAll(p: A => Boolean): Boolean = sys.error("todo")
 
