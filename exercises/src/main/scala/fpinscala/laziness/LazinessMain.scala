@@ -17,5 +17,8 @@ object LazinessMain {
     println("forAll - evens: " + evens.forAll(even))
     println("forAll - odds: " + odds.forAll(even))
     println("forAll - mixed: " + l.forAll(even))
+
+    println("headOption - l: " + l.headOption)
+    println("headOption - empty: " + Stream.empty.headOption)
   }
 }
