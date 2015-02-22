@@ -60,6 +60,15 @@ trait Stream[+A] {
   // solutions: use tailrec + List.reverse
   def toList: List[A] = foldRight(List[A]())(_ :: _)
 
+  def map[A,B](f: (A) => B): Stream[B] = sys.error("todo")
+
+  def filter[A](p: (A) => Boolean): Stream[A] = sys.error("todo")
+
+  // append should be non-strict in it's arguments
+  def append[B >: A](rest: Stream[B]): Stream[B] = sys.error("todo")
+
+  def flatMap[A,B](f: (A) => Stream[B]): Stream[B] = sys.error("todo")
+
 }
 case object Empty extends Stream[Nothing]
 case class Cons[+A](h: () => A, t: () => Stream[A]) extends Stream[A]
