@@ -60,7 +60,8 @@ trait Stream[+A] {
   // solutions: use tailrec + List.reverse
   def toList: List[A] = foldRight(List[A]())(_ :: _)
 
-  def map[A,B](f: (A) => B): Stream[B] = sys.error("todo")
+  def map[B](f: A => B): Stream[B] =
+    foldRight(empty[B])((h,t) => cons(f(h), t))
 
   def filter[A](p: (A) => Boolean): Stream[A] = sys.error("todo")
 

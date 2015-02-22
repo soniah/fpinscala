@@ -20,5 +20,8 @@ object LazinessMain {
 
     println("headOption - l: " + l.headOption)
     println("headOption - empty: " + Stream.empty.headOption)
+
+    def plus1(x: Int) = {x+1}
+    println("map: " + evens.map(plus1).toList)
   }
 }
