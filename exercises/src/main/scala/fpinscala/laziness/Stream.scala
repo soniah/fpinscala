@@ -43,10 +43,11 @@ trait Stream[+A] {
     case _ => Empty
   }
 
-  def forAll(p: A => Boolean): Boolean = this match {
-    case Cons(h, t) => p(h()) && t().forAll(p)
-    case _ => true
-  }
+  // Since `&&` is non-strict in its second argument, this
+  // terminates the traversal as soon as a nonmatching element
+  // is found.
+  def forAll(p: A => Boolean): Boolean =
+    foldRight(true)((a,b) => p(a) && b)
 
   def headOption: Option[A] = sys.error("todo")
 
