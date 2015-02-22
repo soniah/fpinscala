@@ -37,11 +37,10 @@ trait Stream[+A] {
     case s => s // or soln: case _ => this
   }
 
-  def takeWhile(p: A => Boolean): Stream[A] = this match {
-    // soln: scala style is "t() takeWhile f"
-    case Cons(h, t) if p(h()) => cons(h(), t().takeWhile(p))
-    case _ => Empty
-  }
+  def takeWhile(p: A => Boolean): Stream[A] =
+    foldRight(empty[A])((h,t) =>
+      if (p(h)) cons(h, t.takeWhile(p))
+      else empty)
 
   // Since `&&` is non-strict in its second argument, this
   // terminates the traversal as soon as a nonmatching element
