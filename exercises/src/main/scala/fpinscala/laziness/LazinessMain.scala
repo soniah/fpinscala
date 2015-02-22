@@ -11,5 +11,11 @@ object LazinessMain {
 
     def even(x: Int) = {(x % 2) == 0}
     println("takeWhile(even): " + l.takeWhile(even).toList)
+
+    val evens = Stream(10,12,14,16)
+    val odds = Stream(11,13,15,17)
+    println("forAll - evens: " + evens.forAll(even))
+    println("forAll - odds: " + odds.forAll(even))
+    println("forAll - mixed: " + l.forAll(even))
   }
 }
