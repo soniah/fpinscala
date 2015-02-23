@@ -23,5 +23,6 @@ object LazinessMain {
 
     def plus1(x: Int) = {x+1}
     println("map: " + evens.map(plus1).toList)
+    println("filter: " + l.filter(even).toList)
   }
 }

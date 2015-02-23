@@ -57,7 +57,8 @@ trait Stream[+A] {
   def map[B](f: A => B): Stream[B] =
     foldRight(empty[B])((h,t) => cons(f(h), t))
 
-  def filter[A](p: (A) => Boolean): Stream[A] = sys.error("todo")
+  def filter(p: (A) => Boolean): Stream[A] =
+    foldRight(empty[A])((h,t) => if (p(h)) cons(h,t) else t)
 
   // append should be non-strict in it's arguments
   def append[B >: A](rest: Stream[B]): Stream[B] = sys.error("todo")
