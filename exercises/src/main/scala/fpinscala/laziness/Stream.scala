@@ -61,7 +61,8 @@ trait Stream[+A] {
     foldRight(empty[A])((h,t) => if (p(h)) cons(h,t) else t)
 
   // append should be non-strict in it's arguments
-  def append[B >: A](rest: Stream[B]): Stream[B] = sys.error("todo")
+  def append[B >: A](a2: => Stream[B]): Stream[B] =
+    foldRight(a2)((h,t) => cons(h,t))
 
   def flatMap[A,B](f: (A) => Stream[B]): Stream[B] = sys.error("todo")
 
