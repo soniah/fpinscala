@@ -31,5 +31,7 @@ object LazinessMain {
     println("constant: " + Stream.constant(42).take(3).toList)
 
     println("from: " + Stream.from(5).take(3).toList)
+
+    println("fibs: " + Stream.fibs(0,1).take(10).toList)
   }
 }
