@@ -29,5 +29,7 @@ object LazinessMain {
     println("flatMap: " + evens.flatMap(plus2).toList)
 
     println("constant: " + Stream.constant(42).take(3).toList)
+
+    println("from: " + Stream.from(5).take(3).toList)
   }
 }

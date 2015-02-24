@@ -93,7 +93,11 @@ object Stream {
   def constant[A](a: A): Stream[A] =
     Stream.cons(a, constant(a))
 
-  def from(n: Int): Stream[Int] = sys.error("todo")
+  // is my solution lazier than using cons?
+  def from(n: Int): Stream[Int] = {
+    lazy val tail: Stream[Int] = Cons(() => n, () => tail.map(_ + 1))
+    tail
+  }
 
   def unfold[A, S](z: S)(f: S => Option[(A, S)]): Stream[A] = sys.error("todo")
 }
