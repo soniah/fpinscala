@@ -25,8 +25,9 @@ object LazinessMain {
     println("map: " + evens.map(plus1).toList)
     println("filter: " + l.filter(even).toList)
     println("append: " + evens.append(odds).toList)
-
     def plus2(x: Int) = {Stream(x+2)}
     println("flatMap: " + evens.flatMap(plus2).toList)
+
+    println("constant: " + Stream.constant(42).take(3).toList)
   }
 }
