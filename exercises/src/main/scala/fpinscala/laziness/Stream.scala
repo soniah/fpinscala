@@ -64,7 +64,8 @@ trait Stream[+A] {
   def append[B >: A](a2: => Stream[B]): Stream[B] =
     foldRight(a2)((h,t) => cons(h,t))
 
-  def flatMap[A,B](f: (A) => Stream[B]): Stream[B] = sys.error("todo")
+  def flatMap[B](f: A => Stream[B]): Stream[B] =
+    foldRight(empty[B])((h,t) => f(h) append t )
 
   // solutions: use tailrec + List.reverse
   def toList: List[A] = foldRight(List[A]())(_ :: _)
