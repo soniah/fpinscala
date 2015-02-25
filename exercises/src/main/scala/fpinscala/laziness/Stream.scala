@@ -114,13 +114,13 @@ object Stream {
   // 5.12 use unfold to implement fibs, from, constant and ones
 
   val ones: Stream[Int] =
-    unfold(1)(x => Some((1,1)))
+    unfold(1)(_ => Some(( 1,1 )))
 
   def constant[A](a: A): Stream[A] =
-    unfold(a)(x => Some((x,x)))
+    unfold(a)(_ => Some(( a,a )))
 
   def from(n: Int): Stream[Int] =
-    unfold(n)(x => Some((x,x+1)))
+    unfold(n)(x => Some(( x,x+1 )))
 
   def fibs: Stream[Int] =
     unfold((0,1)){ case (x,y) =>
