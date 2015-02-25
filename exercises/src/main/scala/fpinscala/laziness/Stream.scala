@@ -126,4 +126,13 @@ object Stream {
     unfold((0,1)){ case (x,y) =>
       Some( (x, (y, x+y)) ) }
 
+  // 5.13 use unfold to implement map, take, takeWhile, zipWith
+  // and zipAll. The zipAll function should continue the
+  // traversal as long as either stream has more elements—it
+  // uses Option to indicate whether each stream has been
+  // exhausted.
+
+
+  def zipAll[B](s2: Stream[B]): Stream[(Option[A],Option[B])] =
+    sys.error("todo")
 }
