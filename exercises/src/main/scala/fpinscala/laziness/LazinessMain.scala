@@ -28,10 +28,11 @@ object LazinessMain {
     def plus2(x: Int) = {Stream(x+2)}
     println("flatMap: " + evens.flatMap(plus2).toList)
 
-    println("constant: " + Stream.constant(42).take(3).toList)
     println("from: " + Stream.from(5).take(3).toList)
     println("fibs_old: " + Stream.fibs_old(0,1).take(10).toList)
 
     println("ones: " + Stream.ones.take(5).toList)
+    println("constant_old: " + Stream.constant_old(42).take(3).toList)
+    println("constant: " + Stream.constant(42).take(3).toList)
   }
 }

@@ -90,8 +90,8 @@ object Stream {
   val ones_old: Stream[Int] = Stream.cons(1, ones_old)
 
   // solutions: more efficient version
-  def constant[A](a: A): Stream[A] =
-    Stream.cons(a, constant(a))
+  def constant_old[A](a: A): Stream[A] =
+    Stream.cons(a, constant_old(a))
 
   // solution: cons(n, from(n+1))
   // is my solution lazier than using cons?
@@ -115,6 +115,9 @@ object Stream {
 
   val ones: Stream[Int] =
     unfold(1)(x => Some((1,1)))
+
+  def constant[A](a: A): Stream[A] =
+    unfold(a)(x => Some((x,x)))
 
   // def fibs: Stream[Int] = {
   //   def f(s: (Int,Int)): Option[(Int,Int)] = {
