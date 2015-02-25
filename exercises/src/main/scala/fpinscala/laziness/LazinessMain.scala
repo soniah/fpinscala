@@ -22,7 +22,6 @@ object LazinessMain {
     println("headOption - empty: " + Stream.empty.headOption)
 
     def plus1(x: Int) = {x+1}
-    println("map: " + evens.map(plus1).toList)
     println("filter: " + l.filter(even).toList)
     println("append: " + evens.append(odds).toList)
     def plus2(x: Int) = {Stream(x+2)}
@@ -36,7 +35,8 @@ object LazinessMain {
     println("fibs_old: " + Stream.fibs_old(0,1).take(10).toList)
     println("fibs: " + Stream.fibs.take(10).toList)
 
-
+    println("map: " + evens.map(plus1).toList)
+    println("mapU: " + evens.mapU(plus1).toList)
 
   }
 }

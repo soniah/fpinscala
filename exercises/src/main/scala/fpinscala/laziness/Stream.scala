@@ -69,6 +69,26 @@ trait Stream[+A] {
 
   // solutions: use tailrec + List.reverse
   def toList: List[A] = foldRight(List[A]())(_ :: _)
+
+  // 5.13 use unfold to implement map, take, takeWhile, zipWith
+  // and zipAll. The zipAll function should continue the
+  // traversal as long as either stream has more elements—it
+  // uses Option to indicate whether each stream has been
+  // exhausted.
+
+  // Scala provides shorter syntax when the first action of a
+  // function literal is to match on an expression. We can avoid
+  // having to provide a dummy variable 'x' and go straight into
+  // the cases ie shorthand for:
+  // unfold(this)(x => x match { case.. case.. })
+  def mapU[B](f: A => B): Stream[B] =
+    unfold(this){
+      case Cons(h,t) => Some(( f(h()),t() ))
+      case _ => None
+    }
+
+  def zipAll[B](s2: Stream[B]): Stream[(Option[A],Option[B])] =
+    sys.error("todo")
 }
 
 case object Empty extends Stream[Nothing]
@@ -126,13 +146,4 @@ object Stream {
     unfold((0,1)){ case (x,y) =>
       Some( (x, (y, x+y)) ) }
 
-  // 5.13 use unfold to implement map, take, takeWhile, zipWith
-  // and zipAll. The zipAll function should continue the
-  // traversal as long as either stream has more elements—it
-  // uses Option to indicate whether each stream has been
-  // exhausted.
-
-
-  def zipAll[B](s2: Stream[B]): Stream[(Option[A],Option[B])] =
-    sys.error("todo")
 }
