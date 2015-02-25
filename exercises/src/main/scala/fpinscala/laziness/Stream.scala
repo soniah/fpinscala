@@ -95,7 +95,7 @@ object Stream {
 
   // solution: cons(n, from(n+1))
   // is my solution lazier than using cons?
-  def from(n: Int): Stream[Int] = {
+  def from_old(n: Int): Stream[Int] = {
     lazy val tail: Stream[Int] = Cons(() => n, () => tail.map(_ + 1))
     tail
   }
@@ -118,6 +118,9 @@ object Stream {
 
   def constant[A](a: A): Stream[A] =
     unfold(a)(x => Some((x,x)))
+
+  def from(n: Int): Stream[Int] =
+    unfold(n)(x => Some((x,x+1)))
 
   // def fibs: Stream[Int] = {
   //   def f(s: (Int,Int)): Option[(Int,Int)] = {
