@@ -87,7 +87,7 @@ object Stream {
     if (as.isEmpty) empty
     else cons(as.head, apply(as.tail: _*))
 
-  val ones: Stream[Int] = Stream.cons(1, ones)
+  val ones_old: Stream[Int] = Stream.cons(1, ones_old)
 
   // solutions: more efficient version
   def constant[A](a: A): Stream[A] =
@@ -101,8 +101,8 @@ object Stream {
   }
 
   // soln uses a go(0, 1), but same thing
-  def fibs(n0: Int, n1:Int): Stream[Int] = {
-    cons(n0, fibs(n1, n0 + n1))
+  def fibs_old(n0: Int, n1:Int): Stream[Int] = {
+    cons(n0, fibs_old(n1, n0 + n1))
   }
 
   def unfold[A, S](z: S)(f: S => Option[(A, S)]): Stream[A] =
@@ -110,4 +110,16 @@ object Stream {
       case None => empty[A]
       case Some((a,s)) => cons(a, unfold(s)(f))
     }
+
+  // 5.12 use unfold to implement fibs, from, constant and ones
+
+  val ones: Stream[Int] =
+    unfold(1)(x => Some((1,1)))
+
+  // def fibs: Stream[Int] = {
+  //   def f(s: (Int,Int)): Option[(Int,Int)] = {
+  //   }
+  // }
+
+
 }
