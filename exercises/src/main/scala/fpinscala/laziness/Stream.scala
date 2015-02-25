@@ -122,10 +122,8 @@ object Stream {
   def from(n: Int): Stream[Int] =
     unfold(n)(x => Some((x,x+1)))
 
-  // def fibs: Stream[Int] = {
-  //   def f(s: (Int,Int)): Option[(Int,Int)] = {
-  //   }
-  // }
-
+  def fibs: Stream[Int] =
+    unfold((0,1)){ case (x,y) =>
+      Some( (x, (y, x+y)) ) }
 
 }
