@@ -5,8 +5,8 @@ object LazinessMain {
   def main(args: Array[String]): Unit = {
 
     val l = Stream(10,12,13,14,15)
+    val e = Empty
     println("toList: " + l.toList)
-    println("take(2): " + l.take(2).toList)
     println("drop(2): " + l.drop(2).toList)
 
     def even(x: Int) = {(x % 2) == 0}
@@ -38,5 +38,9 @@ object LazinessMain {
     println("map: " + evens.map(plus1).toList)
     println("mapU: " + evens.mapU(plus1).toList)
 
+    println("take(2): " + l.take(12).toList)
+    println("takeU(2): " + l.take(12).toList)
+    println("take(2): " + e.take(2).toList)
+    println("takeU(2): " + e.take(2).toList)
   }
 }

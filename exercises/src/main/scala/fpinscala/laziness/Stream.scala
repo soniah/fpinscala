@@ -87,6 +87,12 @@ trait Stream[+A] {
       case _ => None
     }
 
+  def takeU(n: Int): Stream[A] =
+    unfold( (this,n) ){
+      case (Cons(h,t),n) if (n>0) => Some(( h(),(t(),n-1) ))
+      case _ => None
+    }
+
   def zipAll[B](s2: Stream[B]): Stream[(Option[A],Option[B])] =
     sys.error("todo")
 }
