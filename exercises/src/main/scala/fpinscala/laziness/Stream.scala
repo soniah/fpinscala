@@ -99,6 +99,16 @@ trait Stream[+A] {
       case _ => None
     }
 
+  // my chapter3 code:
+  // def zipWith[A, B, C](as: List[A], bs: List[B])(f: (A, B) => C): List[C] = (as, bs) match {
+  //   case (_, Nil) => Nil
+  //   case (Nil, _) => Nil
+  //   case (Cons(a, as), Cons(b, bs)) => Cons(f(a, b), zipWith(as, bs)(f))
+  // }
+
+  def zipWith[B](s2: Stream[B]): Stream[(Option[A],Option[B])] =
+    sys.error("todo")
+
   def zipAll[B](s2: Stream[B]): Stream[(Option[A],Option[B])] =
     sys.error("todo")
 }
