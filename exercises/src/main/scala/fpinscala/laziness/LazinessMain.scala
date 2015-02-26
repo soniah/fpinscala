@@ -45,5 +45,7 @@ object LazinessMain {
 
     println("takeWhile(even): " + l.takeWhile(even).toList)
     println("takeWhileU(even): " + l.takeWhile(even).toList)
+
+    println("zipWith: " + evens.zipWith(odds)(_ + _).toList)
   }
 }

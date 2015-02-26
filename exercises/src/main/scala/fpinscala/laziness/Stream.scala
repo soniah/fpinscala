@@ -106,8 +106,12 @@ trait Stream[+A] {
   //   case (Cons(a, as), Cons(b, bs)) => Cons(f(a, b), zipWith(as, bs)(f))
   // }
 
-  def zipWith[B](s2: Stream[B]): Stream[(Option[A],Option[B])] =
-    sys.error("todo")
+  def zipWith[B,C](s2: Stream[B])(f: (A,B) => C): Stream[C] =
+    unfold((this,s2)) {
+      case (( Cons(h1,t1),Cons(h2,t2) )) =>
+        Some(( f(h1(),h2()), (t1(),t2()) ))
+      case _ => None
+    }
 
   def zipAll[B](s2: Stream[B]): Stream[(Option[A],Option[B])] =
     sys.error("todo")
