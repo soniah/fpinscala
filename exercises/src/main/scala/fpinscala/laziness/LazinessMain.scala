@@ -38,9 +38,12 @@ object LazinessMain {
     println("map: " + evens.map(plus1).toList)
     println("mapU: " + evens.mapU(plus1).toList)
 
-    println("take(2): " + l.take(12).toList)
-    println("takeU(2): " + l.take(12).toList)
+    println("take(2): " + l.take(2).toList)
+    println("takeU(2): " + l.take(2).toList)
     println("take(2): " + e.take(2).toList)
     println("takeU(2): " + e.take(2).toList)
+
+    println("takeWhile(even): " + l.takeWhile(even).toList)
+    println("takeWhileU(even): " + l.takeWhile(even).toList)
   }
 }

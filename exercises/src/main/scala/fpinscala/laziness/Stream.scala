@@ -82,14 +82,20 @@ trait Stream[+A] {
   // the cases ie shorthand for:
   // unfold(this)(x => x match { case.. case.. })
   def mapU[B](f: A => B): Stream[B] =
-    unfold(this){
+    unfold(this) {
       case Cons(h,t) => Some(( f(h()),t() ))
       case _ => None
     }
 
   def takeU(n: Int): Stream[A] =
-    unfold( (this,n) ){
-      case (Cons(h,t),n) if (n>0) => Some(( h(),(t(),n-1) ))
+    unfold((this,n)) {
+      case (Cons(h,t),n) if n>0 => Some(( h(),(t(),n-1) ))
+      case _ => None
+    }
+
+  def takeWhileU(p: A => Boolean): Stream[A] =
+    unfold((this,p)) {
+      case (Cons(h,t),n) if p(h()) => Some(( h(),(t(),p) ))
       case _ => None
     }
 
