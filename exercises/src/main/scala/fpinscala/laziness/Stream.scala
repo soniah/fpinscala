@@ -99,13 +99,6 @@ trait Stream[+A] {
       case _ => None
     }
 
-  // my chapter3 code:
-  // def zipWith[A, B, C](as: List[A], bs: List[B])(f: (A, B) => C): List[C] = (as, bs) match {
-  //   case (_, Nil) => Nil
-  //   case (Nil, _) => Nil
-  //   case (Cons(a, as), Cons(b, bs)) => Cons(f(a, b), zipWith(as, bs)(f))
-  // }
-
   def zipWith[B,C](s2: Stream[B])(f: (A,B) => C): Stream[C] =
     unfold((this,s2)) {
       case (( Cons(h1,t1),Cons(h2,t2) )) =>
