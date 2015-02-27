@@ -3,6 +3,9 @@ package fpinscala.state
 object StateMain {
   import fpinscala.state._
   def main(args: Array[String]): Unit = {
-    println("Hello State!")
+
+    val rng = RNG.Simple(42)
+    val (n1, _) = RNG.nonNegativeInt(rng)
+    println("nonNegativeInt: " + n1)
   }
 }
