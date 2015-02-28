@@ -22,5 +22,8 @@ object StateMain {
 
     val (l1, _) = RNG.ints(5)(rng)
     println(s"ints(5): $l1")
+
+    val (n10, _) = RNG.double2(rng)
+    println(s"double2: $n10")
   }
 }

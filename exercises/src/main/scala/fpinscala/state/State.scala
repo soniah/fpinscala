@@ -65,6 +65,7 @@ object RNG {
     ((i1,d2),r2)
   }
 
+  // soln: use intDouble, reverse output
   def doubleInt(rng: RNG): ((Double,Int), RNG) = {
     val (d1,r1) = double(rng)
     val (i2,r2) = r1.nextInt
@@ -90,6 +91,13 @@ object RNG {
     }
     go(count)(rng)(List[Int]())
   }
+
+  def foo: Rand[Int] =
+    map(nonNegativeInt)(i => i - i % 2)
+
+  // soln: used _ not i; but whatever...
+  def double2: Rand[Double] =
+    map(nonNegativeInt)(i => i / (Int.MaxValue.toDouble + 1))
 
   def map2[A,B,C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] = ???
 
