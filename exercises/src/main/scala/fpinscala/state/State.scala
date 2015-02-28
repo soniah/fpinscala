@@ -78,7 +78,18 @@ object RNG {
     ((d1,d2,d3),r3)
   }
 
-  def ints(count: Int)(rng: RNG): (List[Int], RNG) = ???
+  // scalaz has an unfold, but...
+  def ints(count: Int)(rng: RNG): (List[Int], RNG) = {
+    @annotation.tailrec
+    def go(count: Int)(rng: RNG)(acc: List[Int]): (List[Int], RNG) = {
+      if (count == 0) (acc,rng)
+      else {
+        val (i1, r1) = rng.nextInt
+        go(count-1)(r1)(i1 :: acc)
+      }
+    }
+    go(count)(rng)(List[Int]())
+  }
 
   def map2[A,B,C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] = ???
 
