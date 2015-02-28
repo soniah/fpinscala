@@ -106,7 +106,22 @@ object RNG {
       (f(a,b),rngb)
     }
 
-  def sequence[A](fs: List[Rand[A]]): Rand[List[A]] = ???
+  // soln: my soln works, but inelegantly. When I see a list
+  // input, I should think "foldRight"! z is then
+  // 'unit(List[A]())' and join results using map2 (which I
+  // just wrote) operating on ::
+  def sequence[A](fs: List[Rand[A]]): Rand[List[A]] =
+    rngla => {
+      fs match {
+        case h :: t => {
+          val (ha, hrng) = h(rngla)
+          val randt = sequence(t)
+          val (ta, trng) = randt(hrng)
+          ((ha :: ta), trng)
+        }
+        case _ => (List[A](), rngla)
+      }
+    }
 
   def flatMap[A,B](f: Rand[A])(g: A => Rand[B]): Rand[B] = ???
 }

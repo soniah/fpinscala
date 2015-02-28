@@ -31,5 +31,11 @@ object StateMain {
     val f1 = RNG.map2(RNG.int,RNG.nonNegativeInt)(plus)
     val (n11, _) = f1(rng)
     println(s"map2: $n11")
+
+    val lri = List[RNG.Rand[Int]](RNG.int, RNG.nonNegativeInt)
+    val rli = RNG.sequence(lri)
+    val (tup1, _) = rli(rng)
+    println(s"sequence: $tup1")
+
   }
 }
