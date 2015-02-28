@@ -25,5 +25,11 @@ object StateMain {
 
     val (n10, _) = RNG.double2(rng)
     println(s"double2: $n10")
+
+    def plus = ((x:Int,y:Int) => x+y)
+
+    val f1 = RNG.map2(RNG.int,RNG.nonNegativeInt)(plus)
+    val (n11, _) = f1(rng)
+    println(s"map2: $n11")
   }
 }

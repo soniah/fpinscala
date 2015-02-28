@@ -40,9 +40,9 @@ object RNG {
     rng => (a, rng)
 
   def map[A,B](s: Rand[A])(f: A => B): Rand[B] =
-    rng => {
-      val (a, rng2) = s(rng)
-      (f(a), rng2)
+    rngb => {
+      val (a, rnga) = s(rngb)
+      (f(a), rnga)
     }
 
   // soln: +1 for n1<0
@@ -99,7 +99,12 @@ object RNG {
   def double2: Rand[Double] =
     map(nonNegativeInt)(i => i / (Int.MaxValue.toDouble + 1))
 
-  def map2[A,B,C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] = ???
+  def map2[A,B,C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] =
+    rngc => {
+      val (a, rnga) = ra(rngc)
+      val (b, rngb) = rb(rnga)
+      (f(a,b),rngb)
+    }
 
   def sequence[A](fs: List[Rand[A]]): Rand[List[A]] = ???
 
