@@ -52,7 +52,12 @@ object RNG {
     else (n1, rng1)
   }
 
-  def double(rng: RNG): (Double, RNG) = ???
+  // soln: / (Int.MaxValue.toDouble + 1)
+  def double(rng: RNG): (Double, RNG) = {
+    val (n1, rng1) = nonNegativeInt(rng)
+    if (n1 == Int.MaxValue) ((n1 - 1).toDouble / Int.MaxValue, rng1)
+    else (n1.toDouble / Int.MaxValue, rng1)
+  }
 
   def intDouble(rng: RNG): ((Int,Double), RNG) = ???
 
