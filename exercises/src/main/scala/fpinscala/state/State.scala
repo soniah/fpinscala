@@ -136,6 +136,12 @@ object RNG {
       else nonNegativeLessThan(n)
     }
 
+  def _map[A,B](s: Rand[A])(f: A => B): Rand[B] =
+    flatMap(s){ i => unit(f(i)) }
+
+  def _map2[A,B,C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] =
+    flatMap(ra){ a => map(rb) { b => f(a,b) } }
+
 }
 
 case class State[S,+A](run: S => (A, S)) {
