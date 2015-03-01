@@ -37,5 +37,8 @@ object StateMain {
     val (tup1, _) = rli(rng)
     println(s"sequence: $tup1")
 
+    val llt = List(RNG.nonNegativeLessThan(6), RNG.nonNegativeLessThan(6), RNG.nonNegativeLessThan(6))
+    val (tup2, _) = RNG.sequence(llt)(rng)
+    println(s"nonNegativeLessThan(6): $tup2")
   }
 }
