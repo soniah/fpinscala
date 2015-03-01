@@ -155,11 +155,13 @@ case class State[S,+A](run: S => (A, S)) {
     sys.error("todo")
 
   def flatMap[B](f: A => State[S, B]): State[S, B] =
-    sys.error("todo")
+    State(s => {
 
-  // def unit
+    })
 
-  // def sequence
+  // def unit -> in object State
+
+  // def sequence -> in object State
 
 }
 
