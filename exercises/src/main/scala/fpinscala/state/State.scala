@@ -166,8 +166,11 @@ object State {
 
   def unit[S,A](a: A): State[S,A] = State(s => (a,s))
 
+  // soln: tidier syntax - unit[S, List[A]](List()) vs below
   def sequence[S,A](ss: List[State[S,A]]): State[S,List[A]] =
-    sys.error("todo")
+    ss.foldRight(State.unit(List[A]()):State[S,List[A]]){
+      (f, acc) => f.map2(acc)(_ :: _)
+    }
 
   type Rand[A] = State[RNG, A]
 
