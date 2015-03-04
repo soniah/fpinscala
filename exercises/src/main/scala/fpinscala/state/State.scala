@@ -149,16 +149,25 @@ object RNG {
 case class State[S,+A](run: S => (A, S)) {
 
   def map[B](f: A => B): State[S, B] =
-    this.flatMap{ i => State.unit(f(i)) }
+    flatMap{ i => State.unit(f(i)) }
 
   def map2[B,C](sb: State[S, B])(f: (A, B) => C): State[S, C] =
-    this.flatMap{ a => sb.map { b => f(a,b) } }
+    flatMap{ a => sb.map { b => f(a,b) } }
 
   def flatMap[B](f: A => State[S, B]): State[S, B] =
     State(s => {
       val (a, s2) = run(s)
       f(a).run(s2)
     })
+
+  def get[S]: State[S, S] = State(s => (s, s))
+
+  def set[S](s: S): State[S, Unit] = State(_ => ((), s))
+
+  def modify[S](f: S => S): State[S,Unit] = for {
+    s <- get
+    _ <- set(f(s))
+  } yield ()
 
 }
 
