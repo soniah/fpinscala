@@ -40,5 +40,8 @@ object StateMain {
     val llt = List(RNG.nonNegativeLessThan(6), RNG.nonNegativeLessThan(6), RNG.nonNegativeLessThan(6))
     val (tup2, _) = RNG.sequence(llt)(rng)
     println(s"nonNegativeLessThan(6): $tup2")
+
+    val machineStart = Machine(false, 10, 5)
+    // val inputs = List[Coin,Coin]
   }
 }
